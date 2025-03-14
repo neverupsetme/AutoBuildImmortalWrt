@@ -85,6 +85,11 @@ jobs:
             sha256sum "$file" > "$file.sha256"
             sha256sum -c "$file.sha256"
           done
+          cp ${{ github.workspace }}/bin/targets/x86/64/*squashfs-combined-efi.vmdk ${{ github.workspace }}
+          for file in *squashfs-combined-efi.vmdk; do
+            sha256sum "$file" > "$file.sha256"
+            sha256sum -c "$file.sha256"
+          done
 
       - name: Create info
         run: |
@@ -98,7 +103,7 @@ jobs:
       - name: Upload ImmortWrt as release assets
         uses: softprops/action-gh-release@v2.2.1
         with:
-          tag_name: Autobuild-x86-64-$version
+          tag_name: Autobuild-x86-64-${{ inputs.version }}
           body_path: ${{ github.workspace }}/info.md
           files: |
             ${{ github.workspace }}/*squashfs-combined-efi.img.gz
