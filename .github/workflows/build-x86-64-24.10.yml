@@ -3,6 +3,9 @@ name: build-x86-64-immortalwrt-24.10.0
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: '请输入固件编译版本'
+        required: true
       profile:
         description: '请输入要编译固件大小 单位(MB)'
         required: true
