@@ -60,7 +60,11 @@ fi
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Building image with the following packages:"
 echo "$PACKAGES"
 
+echo "构建默认格式"
 make image PROFILE="generic" PACKAGES="$PACKAGES" FILES="/home/build/immortalwrt/files" ROOTFS_PARTSIZE=$PROFILE
+
+echo "构建VMDK格式"
+make image PROFILE="generic" PACKAGES="$PACKAGES" FILES="/home/build/immortalwrt/files" ROOTFS_PARTSIZE=$PROFILE EXTRA_IMAGE_NAME="custom-vmdk" VMDK_IMAGES="1"
 
 if [ $? -ne 0 ]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: Build failed!"
